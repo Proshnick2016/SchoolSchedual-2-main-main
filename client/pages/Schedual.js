@@ -1,25 +1,19 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { ScrollView, View } from "react-native";
 import SchedualRendering from "../components/SchedualRendering";
+import schedualPageStyles from "../styles/schedualPageStyles"
 
 export default function Schedual() {
     return (
-        <View style={styles.schoolSchedual}>
-            <SchedualRendering weekDayName={'Понедельник'} />
-            <SchedualRendering weekDayName={'Вторник'} />
-            <SchedualRendering weekDayName={'Среда'} />
-            <SchedualRendering weekDayName={'Четверг'} />
-            <SchedualRendering weekDayName={'Пятница'} />
-            <SchedualRendering weekDayName={'Суббота'} />
+        <View style={schedualPageStyles.schoolSchedual}>
+            <View style={schedualPageStyles.schedualView}>
+                <SchedualRendering style={schedualPageStyles.dayStyle} weekDayName={'Понедельник'} />
+                <SchedualRendering weekDayName={'Вторник'} />
+                <SchedualRendering weekDayName={'Среда'} />
+                <SchedualRendering weekDayName={'Четверг'} />
+                <SchedualRendering weekDayName={'Пятница'} />
+                <SchedualRendering weekDayName={'Суббота'} />
+            </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    schoolSchedual: {
-        flex: 1,
-        justifyContent: "center",
-        flexDirection: "column"
-    }
-})
