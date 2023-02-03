@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, AsyncStorage } from "react-native";
+import { Text, FlatList, AsyncStorage, SafeAreaView, View } from "react-native";
 import schedualStyles from "../styles/schedualStyles";
 
 export default function SchedualRendering({ weekDayName }) {
@@ -16,10 +16,15 @@ export default function SchedualRendering({ weekDayName }) {
             getAsyncStorageData();
         }
     });
+
     return (
-        <View>
+        <SafeAreaView style={schedualStyles.container}>
             <Text style={schedualStyles.weekDayName}>{weekDayName}</Text>
-            <FlatList data={weekDayArray} renderItem={({ item }) => <Text> {item.lessonNumber} {item.lessonName} {item.lessonTime}</Text>} />
-        </View>
+            <FlatList data={weekDayArray} renderItem={({ item }) =>
+                <View style={schedualStyles.item}>
+                    <Text> {item.lessonNumber} {item.lessonName} {item.lessonTime}</Text>
+                </View>}
+            />
+        </SafeAreaView>
     );
 }
