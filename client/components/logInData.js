@@ -38,13 +38,13 @@ export function formLessonsInfo(processedPage, optionsToGetElement) {
     const lessonsNames = getArrayByOptionElement(processedPage, optionsToGetElement.optionLessonName); // получаем массив данных для имени
     const lessonTime = getArrayByOptionElement(processedPage, optionsToGetElement.optionLessonTime); // получаем массив данных для времени
 
-
     for (let i = 0; i < lessonsNames.length; i++) { // создаём объект, взяв одинаковые записи у всех массивов, и передаём его в массив. Получаем массив с объектами.
         if (Number(lessonNumber[i]) !== 0) {
             const lessonInfo = makeNewLessonObj(lessonNumber[i], lessonsNames[i], lessonTime[i]);
             allLessons.push(lessonInfo);
         }
     }
+
     for (let i = 0; i < allLessons.length - 1; i++) { // распределение уроков по дням
         allLessonsInfoWithWeekDays[Object.keys(allLessonsInfoWithWeekDays)[dayIndexNum]][i] = allLessons[i];
 
@@ -53,15 +53,12 @@ export function formLessonsInfo(processedPage, optionsToGetElement) {
             dayIndexNum++;
         }
     }
-    console.log(2)
-    for (let y = 0; y < 6; y++) { // очистка от undefined
+
+    for (let y = 1; y < 5; y++) { // очистка от undefined
         while (allLessonsInfoWithWeekDays[Object.keys(allLessonsInfoWithWeekDays)[y]][0] === undefined) {
-            console.log(1)
             allLessonsInfoWithWeekDays[Object.keys(allLessonsInfoWithWeekDays)[y]].splice(0, 1);
         }
     }
-
-    console.log(allLessonsInfoWithWeekDays);
 
     return allLessonsInfoWithWeekDays;
 }

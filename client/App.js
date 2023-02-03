@@ -1,13 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { StatusBar, SafeAreaView } from "react-native";
 import Schedual from "./pages/Schedual";
+import schedualStyles from "./styles/schedualStyles";
 
 export default function App() {
   return (
-    <View>
+    <SafeAreaView style={schedualStyles.container}>
       <Schedual />
       <StatusBar theme="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
