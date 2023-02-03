@@ -26,16 +26,12 @@ export default function HomePage() {
 
         // получение школьного расписания
         const recievedSchoolSchedual = formLessonsInfo(processedPage, optionsToGetElement);
-        /* try {
-             // в локальную базу добавляем: логин, пароль, наше расписание
-             await AsyncStorage.multiSet([['login', login], ['password', password]])
-             await AsyncStorage.setItem('Schedual', JSON.stringify(recievedSchoolSchedual))
- 
-             const b = await AsyncStorage.getItem('Schedual');
-             //console.log(b)
-         } catch (error) {
-             console.log(error)
-         }*/
+        try {
+            // в локальную базу добавляем: логин, пароль, наше расписание
+            await AsyncStorage.multiSet([['login', login], ['password', password], ['Schedual', JSON.stringify(recievedSchoolSchedual)]])
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     return (

@@ -1,23 +1,29 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import React from "react";
+import { Text, FlatList, AsyncStorage, SafeAreaView } from "react-native";
 import schedualStyles from "../styles/schedualStyles";
 
 export default function SchedualRendering({ weekDayName }) {
     const [weekDayArray, setWeekDayArray] = React.useState();
-    const [getten, setStatus] = React.useState(false);
+    const [geted, setGeted] = React.useState(false)
 
     React.useEffect(() => {
-        if (getten === false) {
-            const schedualFromLocaStorage = JSON.parse(window.localStorage.getItem('Schedual'))
-            setWeekDayArray(schedualFromLocaStorage[weekDayName]);
-            setStatus(true);
+        async function getAsyncStorageData() {
+            const schedualFromAsyncStorage = await AsyncStorage.getItem('Schedual');
+            setWeekDayArray(JSON.parse(schedualFromAsyncStorage)[weekDayName]);
+            setGeted(true)
+        }
+        if (geted === false) {
+            getAsyncStorageData();
         }
     });
+
     return (
-        <View>
+        <SafeAreaView>
             <Text style={schedualStyles.weekDayName}>{weekDayName}</Text>
-            <FlatList data={weekDayArray} renderItem={({ item }) => <Text> {item.lessonNumber} {item.lessonName} {item.lessonTime}</Text>} />
-        </View>
+            <FlatList data={weekDayArray} renderItem={({ item }) =>
+                <Text> {item.lessonNumber} {item.lessonName} {item.lessonTime}</Text>
+            }
+            />
+        </SafeAreaView>
     );
 }
